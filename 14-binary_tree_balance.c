@@ -7,16 +7,16 @@
  * Return: Pointer to the created node, or NULL on failure
  */
 
-size_t binary_tree_height(const binary_tree_t *tree)
+int binary_tree_height0(const binary_tree_t *tree)
 {
-	size_t left_height;
-	size_t right_height;
+	int left_height;
+	int right_height;
 
 	if (tree == NULL)
-		return (-1);
+		return (0);
 
-	left_height = binary_tree_height(tree->left);
-	right_height = binary_tree_height(tree->right);
+	left_height = binary_tree_height0(tree->left);
+	right_height = binary_tree_height0(tree->right);
 
 	if (left_height >= right_height)
 		return (left_height + 1);
@@ -37,6 +37,6 @@ int binary_tree_balance(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	return (binary_tree_height(tree->left) - binary_tree_height(tree->right));
+	return (binary_tree_height0(tree->left) - binary_tree_height0(tree->right));
 
 }
