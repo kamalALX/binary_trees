@@ -1,10 +1,10 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_is_full - Inserts a node as the left-child of another node
+ * binary_tree_is_full - checks if a binary tree is full
  * @tree: Pointer to the node to insert the left-child in
  *
- * Return: Pointer to the created node, or NULL on failure
+ * Return: returns 0 if tree is NULL
  */
 
 int binary_tree_is_full(const binary_tree_t *tree)
