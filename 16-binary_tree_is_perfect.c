@@ -105,7 +105,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (binary_tree_balance(tree) == 0 && binary_tree_is_full(tree))
 	{
 		height_of_tree = binary_tree_height(tree);
-		number_of_nodes = pow(2, height_of_tree + 1) - 1;
+        number_of_nodes = (1 << (height_of_tree + 1)) - 1;
 		if (number_of_nodes == binary_tree_nodes_count(tree))
 			return (1);
 	}
