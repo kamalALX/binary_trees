@@ -2,7 +2,7 @@
 
 /**
  * binary_tree_is_full - Inserts a node as the left-child of another node
- * @node: Pointer to the node to insert the left-child in
+ * @tree: Pointer to the node to insert the left-child in
  *
  * Return: Pointer to the created node, or NULL on failure
  */
@@ -69,7 +69,7 @@ int binary_tree_balance(const binary_tree_t *tree)
 }
 
 /**
- * binary_tree_nodes_c -  counts the nodes
+ * binary_tree_nodes_count -  counts the nodes
  * @tree: pointer to the root node of the tree to count the number of nodes.
  *
  * Return: If tree is NULL, the function must return 0.
@@ -90,15 +90,15 @@ size_t binary_tree_nodes_count(const binary_tree_t *tree)
 
 /**
  * binary_tree_is_perfect - Inserts a node as the left-child of another node
- * @node: Pointer to the node to insert the left-child in
+ * @tree: Pointer to the node to insert the left-child in
  *
  * Return: Pointer to the created node, or NULL on failure
  */
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-    int number_of_nodes;
-    int height_of_tree;
+    size_t number_of_nodes;
+    size_t height_of_tree;
 
 	if (tree == NULL)
 		return (0);
@@ -106,7 +106,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
     {
         height_of_tree = binary_tree_height(tree);
         number_of_nodes = pow(2, height_of_tree + 1) - 1;
-        if (number_of_nodes == (int)binary_tree_nodes_count(tree))
+        if (number_of_nodes == binary_tree_nodes_count(tree))
             return (1);
     }
     return (0);
