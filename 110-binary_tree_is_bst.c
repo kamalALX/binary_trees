@@ -40,6 +40,6 @@ void binary_tree_inorder1(const binary_tree_t *tree, int queue[], int *rear)
 		return;
 
 	binary_tree_inorder1(tree->left, queue, rear);
-	queue[++(*rear)] = tree->n;
+	queue[(*rear)++] = tree->n;
 	binary_tree_inorder1(tree->right, queue, rear);
 }
