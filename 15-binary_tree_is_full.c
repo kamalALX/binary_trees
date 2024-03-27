@@ -2,7 +2,7 @@
 
 /**
  * binary_tree_is_full - Inserts a node as the left-child of another node
- * @node: Pointer to the node to insert the left-child in
+ * @tree: Pointer to the node to insert the left-child in
  *
  * Return: Pointer to the created node, or NULL on failure
  */
