@@ -2,8 +2,10 @@
 
 /**
  * sorted_array_to_avl_ - checks if a binary tree is full
+ * @node: Pointer to the node to insert the left-child in
  * @array: Pointer to the node to insert the left-child in
  * @size: Pointer to the node to insert the left-child in
+ * @leftright: Pointer to the node to insert the left-child in
  *
  * Return: returns 0 if tree is NULL
  */
