@@ -65,13 +65,13 @@ avl_t *avl_insert(avl_t **tree, int value)
 			*tree = binary_tree_rotate_left(follow_up);
 		else if (node->parent->right == node && follow_up->left == node->parent)
 		{
-			*tree = binary_tree_rotate_left(node->parent);
-			*tree = binary_tree_rotate_right(node->parent);
+			*tree = binary_tree_rotate_left(follow_up->left);
+			*tree = binary_tree_rotate_right(follow_up);
 		}
 		else if (node->parent->left == node && follow_up->right == node->parent)
 		{
-			*tree = binary_tree_rotate_right(node->parent);
-			*tree = binary_tree_rotate_left(node->parent);
+			*tree = binary_tree_rotate_right(follow_up->right);
+			*tree = binary_tree_rotate_left(follow_up);
 		}
 	}
 	return (node);
