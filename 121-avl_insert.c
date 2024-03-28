@@ -46,7 +46,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 
 	bf = 0;
 	node = bst_insert(tree, value);
-	if (node->parent != NULL && node->parent->parent != NULL)
+	if (node != NULL && node->parent != NULL && node->parent->parent != NULL)
 		bf = binary_tree_balance(node->parent->parent);
 
 	if (bf != -1 && bf != 0 && bf != 1)
