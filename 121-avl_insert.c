@@ -60,9 +60,9 @@ avl_t *avl_insert(avl_t **tree, int value)
 	if (bf != -1 && bf != 0 && bf != 1)
 	{
 		if (node->parent->left == node && follow_up->left == node->parent)
-			*tree = binary_tree_rotate_right(node->parent->parent);
+			*tree = binary_tree_rotate_right(follow_up);
 		else if (node->parent->right == node && follow_up->right == node->parent)
-			*tree = binary_tree_rotate_left(node->parent->parent);
+			*tree = binary_tree_rotate_left(follow_up);
 		else if (node->parent->right == node && follow_up->left == node->parent)
 		{
 			*tree = binary_tree_rotate_left(node->parent);
