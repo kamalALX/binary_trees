@@ -45,6 +45,28 @@ int bst_min(bst_t *tree)
 }
 
 /**
+ * bst_remove_leaf - checks if a binary tree is full
+ * @node: Pointer to the node to insert the left-child in
+ *
+ * Return: returns 0 if tree is NULL
+ */
+
+
+void bst_remove_leaf(bst_t **node)
+{
+    if ((*node)->parent != NULL && (*node) == (*node)->parent->left)
+    {
+		(*node)->parent->left = NULL;
+    }
+    else if ((*node)->parent != NULL && *node == (*node)->parent->right)
+    {
+		(*node)->parent->right = NULL;
+    }
+	free(*node);
+	*node = NULL;
+}
+
+/**
  * bst_remove - checks if a binary tree is full
  * @root: Pointer to the node to insert the left-child in
  * @value: Pointer to the node to insert the left-child in
@@ -63,14 +85,8 @@ bst_t *bst_remove(bst_t *root, int value)
 	node = bst_search(root, value);
 
 	if (node->left == NULL && node->right == NULL)
-	{
-		if (node->parent != NULL && node == node->parent->left)
-			node->parent->left = NULL;
-		else if (node->parent != NULL && node == node->parent->right)
-			node->parent->right = NULL;
-		free(node);
-		node = NULL;
-	}
+        bst_remove_leaf(&node);
+	
 	else if (node->left == NULL || node->right == NULL)
 	{
 		if (node->parent != NULL && node == node->parent->left)
