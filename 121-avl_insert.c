@@ -41,16 +41,21 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 avl_t *avl_insert(avl_t **tree, int value)
 {
-	avl_t *node;
+	avl_t *node, *follow_up;
 	int bf;
 
 	if (tree == NULL)
 		return (NULL);
 
 	bf = 0;
-	node = bst_insert(tree, value);
-	if (node != NULL && node->parent != NULL && node->parent->parent != NULL)
-		bf = binary_tree_balance(node->parent->parent);
+	follow_up = node = bst_insert(tree, value);
+	while (follow_up != NULL)
+	{
+		bf = binary_tree_balance(follow_up);    
+		if (bf != -1 && bf != 0 && bf != 1)
+			break;
+		follow_up = follow_up->parent;
+	}
 
 	if (bf != -1 && bf != 0 && bf != 1)
 	{
