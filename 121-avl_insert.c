@@ -40,8 +40,8 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 avl_t *avl_insert(avl_t **tree, int value)
 {
-    if (tree == NULL)
-        return (NULL);
+	if (tree == NULL)
+		return (NULL);
 
 	avl_t *node;
 	int bf;
@@ -59,12 +59,12 @@ avl_t *avl_insert(avl_t **tree, int value)
 			*tree = binary_tree_rotate_left(node->parent->parent);
 		else if (node->parent->right == node && node->parent->parent->left == node->parent)
 		{
-            *tree = binary_tree_rotate_left(node->parent);
+			*tree = binary_tree_rotate_left(node->parent);
 			*tree = binary_tree_rotate_right(node->parent);
 		}
 		else if (node->parent->left == node && node->parent->parent->right == node->parent)
 		{
-            *tree = binary_tree_rotate_right(node->parent);
+			*tree = binary_tree_rotate_right(node->parent);
 			*tree = binary_tree_rotate_left(node->parent);
 		}
 	}
