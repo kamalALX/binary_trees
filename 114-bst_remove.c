@@ -24,7 +24,6 @@ bst_t *bst_search(const bst_t *tree, int value)
 /**
  * bst_min - checks if a binary tree is full
  * @tree: Pointer to the node to insert the left-child in
- * @value: Pointer to the node to insert the left-child in
  *
  * Return: returns 0 if tree is NULL
  */
@@ -54,16 +53,66 @@ int bst_min(bst_t *tree)
 
 void bst_remove_leaf(bst_t **node)
 {
-    if ((*node)->parent != NULL && (*node) == (*node)->parent->left)
-    {
+	if ((*node)->parent != NULL && (*node) == (*node)->parent->left)
+	{
 		(*node)->parent->left = NULL;
-    }
-    else if ((*node)->parent != NULL && *node == (*node)->parent->right)
-    {
+	}
+	else if ((*node)->parent != NULL && *node == (*node)->parent->right)
+	{
 		(*node)->parent->right = NULL;
-    }
+	}
 	free(*node);
 	*node = NULL;
+}
+
+/**
+ * bst_remove_node_leaf - checks if a binary tree is full
+ * @node: Pointer to the node to insert the left-child in
+ * @root: Pointer to the node to insert the left-child in
+ *
+ * Return: returns 0 if tree is NULL
+ */
+
+void bst_remove_node_leaf(bst_t **node, bst_t **root)
+{
+	if ((*node)->parent != NULL && (*node) == (*node)->parent->left)
+	{
+		if ((*node)->left != NULL)
+		{
+			(*node)->parent->left = (*node)->left;
+			(*node)->left->parent = (*node)->parent;
+		}
+		if ((*node)->right != NULL)
+		{
+			(*node)->parent->left = (*node)->right;
+			(*node)->right->parent = (*node)->parent;
+		}
+	}
+	else if ((*node)->parent != NULL && (*node) == (*node)->parent->right)
+	{
+		if ((*node)->left != NULL)
+		{
+			(*node)->parent->right = (*node)->left;
+			(*node)->left->parent = (*node)->parent;
+		}
+		if ((*node)->right != NULL)
+		{
+			(*node)->parent->right = (*node)->right;
+			(*node)->right->parent = (*node)->parent;
+		}
+	}
+	else if ((*node)->parent == NULL && (*node)->left != NULL)
+	{
+		*root = (*node)->left;
+		(*node)->left->parent = NULL;
+	}
+	else if ((*node)->parent == NULL && (*node)->right != NULL)
+	{
+		*root = (*node)->right;
+		(*node)->right->parent = NULL;
+	}
+	free((*node));
+	(*node) = NULL;
 }
 
 /**
@@ -85,49 +134,11 @@ bst_t *bst_remove(bst_t *root, int value)
 	node = bst_search(root, value);
 
 	if (node->left == NULL && node->right == NULL)
-        bst_remove_leaf(&node);
-	
+		bst_remove_leaf(&node);
+
 	else if (node->left == NULL || node->right == NULL)
-	{
-		if (node->parent != NULL && node == node->parent->left)
-		{
-			if (node->left != NULL)
-			{
-				node->parent->left = node->left;
-				node->left->parent = node->parent;
-			}
-			if (node->right != NULL)
-			{
-				node->parent->left = node->right;
-				node->right->parent = node->parent;
-			}
-		}
-		else if (node->parent != NULL && node == node->parent->right)
-		{
-			if (node->left != NULL)
-			{
-				node->parent->right = node->left;
-				node->left->parent = node->parent;
-			}
-			if (node->right != NULL)
-			{
-				node->parent->right = node->right;
-				node->right->parent = node->parent;
-			}
-		}
-		else if (node->parent == NULL && node->left != NULL)
-		{
-			root = node->left;
-			node->left->parent = NULL;
-		}
-		else if (node->parent == NULL && node->right != NULL)
-		{
-			root = node->right;
-			node->right->parent = NULL;
-		}
-		free(node);
-		node = NULL;
-	}
+		bst_remove_node_leaf(&node, &root);
+
 	else if (node->left != NULL && node->right != NULL)
 	{
 		mini = bst_min(node->right);
