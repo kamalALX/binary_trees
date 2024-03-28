@@ -1,33 +1,5 @@
 #include "binary_trees.h"
 
-
-/**
- * binary_tree_node - function that creates a binary tree node
- *
- * @parent: ointer to the parent node of the node to create
- * @value: the value to put in the new node
- *
- * Return: returns a pointer to the new node, or NULL on failure
-*/
-
-binary_tree_t *binary_tree_node0(binary_tree_t *parent, int value)
-{
-	binary_tree_t *new_node;
-
-	new_node = malloc(sizeof(binary_tree_t));
-	if (new_node == NULL)
-	{
-		return (NULL);
-	}
-
-	new_node->n = value;
-	new_node->left = NULL;
-	new_node->right = NULL;
-	new_node->parent = parent;
-
-	return (new_node);
-}
-
 /**
  * binary_tree_insert_left - Inserts a node as the left-child of another node
  * @parent: Pointer to the node to insert the left-child in
@@ -110,22 +82,22 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 
 bst_t *bst_insert(bst_t **tree, int value)
 {
-    if (tree == NULL)
-        return (NULL);
+	if (tree == NULL)
+		return (NULL);
 
-    if (*tree == NULL)
-        return (*tree = binary_tree_node0(*tree, value));
-    if (value < (*tree)->n)
-    {
-        if ((*tree)->left == NULL)
-            return ((*tree)->left = binary_tree_insert_left(*tree, value));
-        return (bst_insert(&((*tree)->left), value));
-    }
-    else if (value > (*tree)->n)
-    {
-        if ((*tree)->right == NULL)
-            return ((*tree)->right = binary_tree_insert_right(*tree, value));
-        return (bst_insert(&((*tree)->right), value));
-    }
-    return (NULL);
+	if (*tree == NULL)
+		return (*tree = binary_tree_node(*tree, value));
+	if (value < (*tree)->n)
+	{
+		if ((*tree)->left == NULL)
+			return ((*tree)->left = binary_tree_insert_left(*tree, value));
+		return (bst_insert(&((*tree)->left), value));
+	}
+	else if (value > (*tree)->n)
+	{
+		if ((*tree)->right == NULL)
+			return ((*tree)->right = binary_tree_insert_right(*tree, value));
+		return (bst_insert(&((*tree)->right), value));
+	}
+	return (NULL);
 }
