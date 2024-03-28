@@ -40,53 +40,30 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 avl_t *avl_insert(avl_t **tree, int value)
 {
-    avl_t *new_node, *parent, *unbalanced_node;
+	avl_t *node;
+	int bf;
 
-    if (tree == NULL)
-        return NULL;
+	bf = 0;
+	node = bst_insert(tree, value);
+	if (node != NULL && node->parent != NULL && node->parent->parent != NULL)
+		bf = binary_tree_balance(node->parent->parent);
 
-    new_node = bst_insert(tree, value);
-    if (new_node == NULL)
-        return NULL;
-
-    unbalanced_node = NULL;
-    parent = new_node->parent;
-    while (parent != NULL)
-    {
-        int balance_factor;
-
-        balance_factor = binary_tree_balance(parent);
-        if (balance_factor > 1 || balance_factor < -1)
-        {
-            unbalanced_node = parent;
-            break;
-        }
-        parent = parent->parent;
-    }
-
-    if (unbalanced_node != NULL)
-    {
-        if (value < unbalanced_node->n)
-        {
-            if (value < unbalanced_node->left->n)
-                *tree = binary_tree_rotate_right(unbalanced_node);
-            else
-            {
-                unbalanced_node->left = binary_tree_rotate_left(unbalanced_node->left);
-                *tree = binary_tree_rotate_right(unbalanced_node);
-            }
-        }
-        else
-        {
-            if (value > unbalanced_node->right->n)
-                *tree = binary_tree_rotate_left(unbalanced_node);
-            else
-            {
-                unbalanced_node->right = binary_tree_rotate_right(unbalanced_node->right);
-                *tree = binary_tree_rotate_left(unbalanced_node);
-            }
-        }
-    }
-
-    return new_node;
+	if (bf != -1 && bf != 0 && bf != 1)
+	{
+		if (node->parent->left == node && node->parent->parent->left == node->parent)
+			*tree = binary_tree_rotate_right(node->parent->parent);
+		else if (node->parent->right == node && node->parent->parent->right == node->parent)
+			*tree = binary_tree_rotate_left(node->parent->parent);
+		else if (node->parent->right == node && node->parent->parent->left == node->parent)
+		{
+			*tree = binary_tree_rotate_left(node->parent);
+			*tree = binary_tree_rotate_right(node->parent);
+		}
+		else if (node->parent->left == node && node->parent->parent->right == node->parent)
+		{
+			*tree = binary_tree_rotate_right(node->parent);
+			*tree = binary_tree_rotate_left(node->parent);
+		}
+	}
+	return (node);
 }
