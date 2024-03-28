@@ -40,9 +40,6 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 avl_t *avl_insert(avl_t **tree, int value)
 {
-	if (tree == NULL)
-		return (NULL);
-
 	avl_t *node;
 	int bf;
 
