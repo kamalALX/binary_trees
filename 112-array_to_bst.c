@@ -2,7 +2,7 @@
 
 /**
  * array_to_bst - checks if a binary tree is full
- * @tree: Pointer to the node to insert the left-child in
+ * @array: Pointer to the node to insert the left-child in
  * @size: Pointer to the node to insert the left-child in
  *
  * Return: returns 0 if tree is NULL
