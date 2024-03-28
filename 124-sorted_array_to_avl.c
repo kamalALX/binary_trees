@@ -8,12 +8,13 @@
  * Return: returns 0 if tree is NULL
  */
 
-avl_t *sorted_array_to_avl_(avl_t **node, int *array, size_t size, int leftright)
+avl_t *sorted_array_to_avl_(avl_t **node,
+int *array, size_t size, int leftright)
 {
 	size_t mid;
 
 	if (size == 0)
-		return NULL;
+		return (NULL);
 
 	mid = (size / 2);
 
@@ -30,7 +31,8 @@ avl_t *sorted_array_to_avl_(avl_t **node, int *array, size_t size, int leftright
 	{
 		(*node)->right = binary_tree_node(*node, array[mid]);
 		sorted_array_to_avl_(&((*node)->right), array, mid, 1);
-		sorted_array_to_avl_(&((*node)->right), array + mid + 1, (size - mid - 1), 0);
+		sorted_array_to_avl_(&((*node)->right), array + mid + 1,
+		(size - mid - 1), 0);
 	}
 	return (*node);
 }
