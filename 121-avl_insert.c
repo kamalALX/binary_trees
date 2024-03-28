@@ -78,5 +78,5 @@ avl_t *avl_insert(avl_t **tree, int value)
 			*tree = binary_tree_rotate_left(node->parent->parent);
 		}
 	}
-	return (node);
+	return (*tree);
 }
