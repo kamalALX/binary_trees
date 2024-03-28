@@ -85,28 +85,19 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	bf = binary_tree_balance(tree);
-    if (tree->left != NULL)
-	{
-		bfl = binary_tree_balance(tree->left);
-		if (bfl == -1 || bfl == 0 || bfl == 1)
-			bfl = 1;
-		else
-			bfl = 0;
-	}
-    else
-        bfl = 1;
-    if (tree->right != NULL)
-	{
-		bfr = binary_tree_balance(tree->right);
-		if (bfr == -1 || bfr == 0 || bfr == 1)
-			bfr = 1;
-		else
-			bfl = 0;
-	}
-    else
-        bfr = 1;
+	bfl = binary_tree_balance(tree->left);
+	if (bfl == -1 || bfl == 0 || bfl == 1)
+		bfl = 1;
+	else
+		bfl = 0;
 
+	bfr = binary_tree_balance(tree->right);
+	if (bfr == -1 || bfr == 0 || bfr == 1)
+		bfr = 1;
+	else
+		bfl = 0;
+
+	bf = binary_tree_balance(tree);
 	if (bf == -1 || bf == 0 || bf == 1)
 		bf = 1;
 	else
