@@ -43,6 +43,9 @@ avl_t *avl_insert(avl_t **tree, int value)
 	avl_t *node;
 	int bf;
 
+	if (tree == NULL)
+		return (NULL);
+
 	bf = 0;
 	node = bst_insert(tree, value);
 	if (node != NULL && node->parent != NULL && node->parent->parent != NULL)
