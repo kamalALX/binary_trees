@@ -52,9 +52,9 @@ avl_t *avl_insert(avl_t **tree, int value)
 	if (bf != -1 && bf != 0 && bf != 1)
 	{
 		if (node->parent->left == node && node->parent->parent->left == node->parent)
-			binary_tree_rotate_right(node->parent->parent);
+			*tree = binary_tree_rotate_right(node->parent->parent);
 		else if (node->parent->right == node && node->parent->parent->right == node->parent)
-			binary_tree_rotate_left(node->parent->parent);
+			*tree = binary_tree_rotate_left(node->parent->parent);
 		else if (node->parent->right == node && node->parent->parent->left == node->parent)
 		{
 			number = node->parent->n;
@@ -64,7 +64,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 			holdT = node->parent->left;
 			node->parent->left = node;
 			node->parent->right = holdT;
-			binary_tree_rotate_right(node->parent->parent);
+			*tree = binary_tree_rotate_right(node->parent->parent);
 		}
 		else if (node->parent->left == node && node->parent->parent->right == node->parent)
 		{
@@ -75,7 +75,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 			holdT = node->parent->right;
 			node->parent->right = node;
 			node->parent->left = holdT;
-			binary_tree_rotate_left(node->parent->parent);
+			*tree = binary_tree_rotate_left(node->parent->parent);
 		}
 	}
 	return (node);

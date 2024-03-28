@@ -36,5 +36,5 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 	while (root->parent != NULL)
 		root = root->parent;
 
-	return root;
+	return (root);
 }
