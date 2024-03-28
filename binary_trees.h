@@ -1,6 +1,8 @@
 #ifndef _BINARY_TREES_
 #define _BINARY_TREES_
 
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -67,5 +69,6 @@ bst_t *bst_remove(bst_t *root, int value);
 int binary_tree_is_avl(const binary_tree_t *tree);
 avl_t *avl_insert(avl_t **tree, int value);
 int binary_tree_is_heap(const binary_tree_t *tree);
+avl_t *array_to_avl(int *array, size_t size);
 
 #endif /* _BINARY_TREES_ */
