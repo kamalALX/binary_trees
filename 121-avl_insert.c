@@ -74,9 +74,9 @@ avl_t *avl_insert(avl_t **tree, int value)
 			*tree = binary_tree_rotate_left(follow_up);
 		}
         while (binary_tree_balance(*tree) < -1)
-            *tree = binary_tree_rotate_left(*tree);
-        while (binary_tree_balance(*tree) > 1)
             *tree = binary_tree_rotate_right(*tree);
+        while (binary_tree_balance(*tree) > 1)
+            *tree = binary_tree_rotate_left(*tree);
 	}
 	return (node);
 }
