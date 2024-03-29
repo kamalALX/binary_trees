@@ -57,7 +57,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 		follow_up = follow_up->parent;
 	}
 
-	if (bf != -1 && bf != 0 && bf != 1)
+	if (bf > 1 || bf < -1)
 	{
 		if (node->parent->left == node && follow_up->left == node->parent)
 			*tree = binary_tree_rotate_right(follow_up);
