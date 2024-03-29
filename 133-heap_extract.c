@@ -69,8 +69,7 @@ int heap_extract(heap_t **root)
 	int extracted_value;
 	heap_t *last_node, *temp_node;
 	size_t rear, front;
-	size_t count = binary_tree_size(*root);
-	heap_t *queue[count];
+	heap_t *queue[1024];
 
 	if (root == NULL || *root == NULL)
 		return (0);
